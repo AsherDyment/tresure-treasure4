@@ -1,7 +1,13 @@
+function call_blocks () {
+    tiles.setWallAt(tiles.getTileLocation(27, 0), false)
+    tiles.setWallAt(tiles.getTileLocation(27, 2), false)
+    tiles.setWallAt(tiles.getTileLocation(26, 1), false)
+    tiles.setWallAt(tiles.getTileLocation(28, 1), false)
+}
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite, location) {
     if (location.col == 14 && location. row == 13) {
         tiles.setTilemap(tilemap`level2`)
-        tiles.placeOnTile(explorer, tiles.getTileLocation(15, 0))
+        tiles.placeOnTile(explorer, tiles.getTileLocation(14, 0))
     } else if (location.col == 0 && location. row == 3) {
         tiles.setTilemap(tilemap`level5`)
         tiles.placeOnTile(explorer, tiles.getTileLocation(0, 0))
@@ -21,13 +27,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 let SCARYBAT: Sprite = null
 let explorer: Sprite = null
-info.setLife(100)
+info.setLife(10)
 scene.setBackgroundColor(4)
 tiles.setTilemap(tilemap`level1`)
 explorer = sprites.create(img`
-    . . . . . . f f f f . . . . . . 
-    . . . . f f f 2 2 f f f . . . . 
-    . . . f f f 2 2 2 2 f f f . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . f f f f f f f f . . . . 
     . . f f f e e e e e e f f f . . 
     . . f f e 2 2 2 2 2 2 e e f . . 
     . . f e 2 f f f f f f 2 e f . . 
@@ -40,12 +45,16 @@ explorer = sprites.create(img`
     . . 4 d f 2 2 2 2 2 2 f d 4 . . 
     . . 4 4 f 4 4 5 5 4 4 f 4 4 . . 
     . . . . . f f f f f f . . . . . 
-    . . . . . f f . . f f . . . . . 
+    . . . . . f . . . . f . . . . . 
+    . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
-controller.moveSprite(explorer)
+controller.moveSprite(explorer, 100, 100)
 scene.cameraFollowSprite(explorer)
-tiles.placeOnTile(explorer, tiles.getTileLocation(31, 1))
-game.onUpdateInterval(200, function () {
+tiles.placeOnTile(explorer, tiles.getTileLocation(27, 1))
+explorer.say("Hi, you can move with arrow keys and there are many levels so enjoy.", 10000)
+pause(10000)
+call_blocks()
+game.onUpdateInterval(100, function () {
     SCARYBAT = sprites.create(img`
         . . f f f . . . . . . . . f f f 
         . f f c c . . . . . . f c b b c 
@@ -64,7 +73,7 @@ game.onUpdateInterval(200, function () {
         . . f b b b b b b c f . . . . . 
         . . . f f f f f f f . . . . . . 
         `, SpriteKind.Enemy)
-    tiles.placeOnRandomTile(SCARYBAT, assets.tile`transparency16`)
+    tiles.placeOnRandomTile(SCARYBAT, sprites.builtin.oceanDepths9)
     SCARYBAT.vx = -50
     SCARYBAT.setFlag(SpriteFlag.DestroyOnWall, true)
 })
