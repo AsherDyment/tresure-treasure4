@@ -18,6 +18,9 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sp
         tiles.setTilemap(tilemap`level3`)
         tiles.placeOnTile(explorer, tiles.getTileLocation(0, 0))
     } else if (location.col == 15 && location. row == 15) {
+        tiles.setTilemap(tilemap`level7`)
+        tiles.placeOnTile(explorer, tiles.getTileLocation(1, 31))
+    } else if (location.col == 31 && location. row == 31) {
         game.over(true)
     }
 })
@@ -73,7 +76,7 @@ game.onUpdateInterval(100, function () {
         . . f b b b b b b c f . . . . . 
         . . . f f f f f f f . . . . . . 
         `, SpriteKind.Enemy)
-    tiles.placeOnRandomTile(SCARYBAT, sprites.builtin.oceanDepths9)
+    tiles.placeOnRandomTile(SCARYBAT, sprites.builtin.forestTiles20)
     SCARYBAT.vx = -50
     SCARYBAT.setFlag(SpriteFlag.DestroyOnWall, true)
 })
