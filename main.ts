@@ -21,6 +21,12 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sp
         tiles.setTilemap(tilemap`level7`)
         tiles.placeOnTile(explorer, tiles.getTileLocation(1, 31))
     } else if (location.col == 31 && location. row == 31) {
+        tiles.setTilemap(tilemap`level8`)
+        tiles.placeOnTile(explorer, tiles.getTileLocation(15, 0))
+    } else if (location.col == 25 && location.row == 31) {
+        tiles.setTilemap(tilemap`level7`)
+        tiles.placeOnTile(explorer, tiles.getTileLocation(2, 38))
+    } else {
         game.over(true)
     }
 })
@@ -30,7 +36,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 let SCARYBAT: Sprite = null
 let explorer: Sprite = null
-info.setLife(10)
+info.setLife(25)
 scene.setBackgroundColor(4)
 tiles.setTilemap(tilemap`level1`)
 explorer = sprites.create(img`
